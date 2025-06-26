@@ -6,1499 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveling site</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="extracted-styles.css"> 
+    <link rel="stylesheet" href="styles.css"> 
     <link rel="stylesheet" href="/path/to/font-awesome/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-------------------------AOS----------------------->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --bg-black-900: #f2f2fc;
-            --bg-black-100: #fdf9ff;
-            --bg-black-50: #e8dfec;
-            --text-black-900: #050506;
-            --text-black-700: #504e70;
-            --theam-black-700: #ecad29;
-
-            /* New color variables for calculator section */
-            --calculator-bg: #fffefe;
-            --card-bg: #ededed;
-            --border-color: #e5e7eb;
-            --primary-color: #ecad29;
-            --primary-hover: #d69c24;
-            --text-color: #374151;
-            --text-light: #6b7280;
-        }
-
-        body.dark {
-            --bg-black-900: #151515;
-            --bg-black-100: #222222;
-            --bg-black-50: #393939;
-            --text-black-900: #ffffff;
-            --text-black-700: #e9e9e9;
-
-            /* Dark mode colors for calculator */
-            --calculator-bg: #222222;
-            --card-bg: #393939;
-            --border-color: #4b5563;
-            --text-color: #f3f4f6;
-            --text-light: #d1d5db;
-        }
-
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
-
-        body {
-            margin: 0;
-            background-color: var(--bg-black-900);
-            color: var(--text-black-900);
-            position: relative;
-            overflow-x: hidden;
-            font-family: "Inter", sans-serif;
-            min-height: 100vh;
-        }
-
-        .home-section {
-            width: 100vw !important;
-            height: 100vh !important;
-            position: relative;
-            overflow: hidden;
-        }
-
-        section {
-            width: 100vw !important;
-        }
-
-        .card {
-            position: absolute;
-            left: 0;
-            top: 0;
-            background-position: center;
-            background-size: cover;
-            box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.6);
-        }
-
-        .card-content {
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #ffffff;
-            padding-left: 16px;
-        }
-
-        .content-place {
-            margin-top: 6px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .content-title-1,
-        .content-title-2 {
-            font-weight: 600;
-            font-size: 20px;
-            font-family: "Oswald", sans-serif;
-        }
-
-        .content-start {
-            width: 30px;
-            height: 5px;
-            border-radius: 99px;
-            background-color: var(--text-black-900);
-        }
-
-        .details {
-            z-index: 22;
-            position: absolute;
-            top: 25%;
-            left: 60px;
-            width: 40%;
-            height: 70%;
-            color: #ffffff;
-            background-color: rgba(48, 114, 212, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-        }
-
-        .details .place-box {
-            height: 46px;
-            overflow: hidden;
-        }
-
-        .details .place-box .text {
-            padding-top: 16px;
-            font-size: 20px;
-        }
-
-        .details .place-box .text:before {
-            top: 0;
-            left: 0;
-            position: absolute;
-            content: "";
-            width: 30px;
-            height: 4px;
-            border-radius: 99px;
-            background-color: var(--text-black-900);
-        }
-
-        .details .title-1,
-        .details .title-2 {
-            font-weight: 600;
-            font-size: 72px;
-            font-family: "Oswald", sans-serif;
-        }
-
-        .details .title-box-1,
-        .details .title-box-2 {
-            margin-top: 2px;
-            height: 100px;
-            overflow: hidden;
-        }
-
-        .details>.desc {
-            margin-top: 16px;
-            color: #ffffff;
-        }
-
-        .details>.cta {
-            width: 500px;
-            margin-top: 24px;
-            display: flex;
-            align-items: center;
-        }
-
-        nav {
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            z-index: 99;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 36px;
-            font-weight: 500;
-            color: var(--text-black-900);
-            background-color: rgba(48, 114, 212, 0.2);
-            backdrop-filter: blur(5px);
-            border-bottom: 1px var(--text-black-900);
-            width: 100vw;
-            cursor: pointer;
-        }
-
-        nav svg {
-            width: 20px;
-            height: 20px;
-            color: var(--bg-black-900);
-        }
-
-        nav .svg-container {
-            width: 20px;
-            height: 20px;
-        }
-
-        nav>div {
-            display: inline-flex;
-            align-items: center;
-            text-transform: uppercase;
-            font-size: 14px;
-        }
-
-        nav>div:first-child {
-            gap: 10px;
-        }
-
-        nav>div:last-child {
-            gap: 24px;
-        }
-
-        nav>div:last-child>.active {
-            position: relative;
-        }
-
-        nav>div>div:hover:after {
-            bottom: -8px;
-            left: 0;
-            right: 0;
-            position: absolute;
-            content: "";
-            height: 3px;
-            border-radius: 99px;
-            background-color: var(--theam-black-700);
-        }
-
-        nav>div:last-child>.active:after {
-            bottom: -8px;
-            left: 0;
-            right: 0;
-            position: absolute;
-            content: "";
-            height: 3px;
-            border-radius: 99px;
-            background-color: var(--theam-black-700);
-        }
-
-        .indicator {
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: 5px;
-            z-index: 60;
-            background-color: var(--theam-black-700);
-        }
-
-        .pagination {
-            position: absolute;
-            left: 60px;
-            bottom: 60px;
-            display: inline-flex;
-        }
-
-        .pagination>.arrow {
-            z-index: 60;
-            width: 50px;
-            height: 50px;
-            border-radius: 999px;
-            border: 2px solid var(--text-black-900);
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-        }
-
-        .pagination>.arrow:hover {
-            width: 50px;
-            height: 50px;
-            background-color: var(--theam-black-700);
-        }
-
-        .pagination>.arrow:nth-child(2) {
-            margin-left: 20px;
-        }
-
-        .pagination>.arrow svg {
-            width: 24px;
-            height: 24px;
-            stroke-width: 2;
-            color: var(--text-black-900);
-        }
-
-        .pagination .progress-sub-container {
-            margin-left: 24px;
-            z-index: 60;
-            width: 500px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-        }
-
-        .pagination .progress-sub-container .progress-sub-background {
-            width: 500px;
-            height: 3px;
-            background-color: var(--text-black-700);
-        }
-
-        .pagination .progress-sub-container .progress-sub-background .progress-sub-foreground {
-            height: 3px;
-            background-color: var(--theam-black-700);
-        }
-
-        .pagination .slide-numbers {
-            width: 50px;
-            height: 50px;
-            overflow: hidden;
-            z-index: 60;
-            position: relative;
-        }
-
-        .pagination .slide-numbers .item {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            color: var(--text-black-900);
-            top: 0;
-            left: 0;
-            display: grid;
-            place-items: center;
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .cover {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-black-900);
-            z-index: 100;
-        }
-
-        .theme-switcher {
-            position: fixed;
-            top: 4px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--bg-black-900);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--theam-black-700);
-        }
-
-        /* Updated Button Styles with Premium Hover Effects */
-        .btn {
-            display: inline-block;
-            font-weight: 500;
-            text-align: center;
-            padding: 0.75rem 1.75rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-p {
-            background-color: var(--theam-black-700);
-            color: var(--text-black-900);
-            /* Gradient effect */
-            background-image: linear-gradient(135deg,
-                    rgba(255, 255, 255, 0.15) 0%,
-                    rgba(255, 255, 255, 0) 50%);
-            /* Shine effect */
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-p::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.2),
-                    transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-
-        .btn-p:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(236, 173, 41, 0.25);
-        }
-
-        .btn-p:hover::before {
-            left: 100%;
-        }
-
-        /* Pulse animation on click */
-        .btn-p:active {
-            animation: pulse 0.4s ease-out;
-            box-shadow: 0 0 0 8px rgba(236, 173, 41, 0);
-        }
-
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(236, 173, 41, 0.4);
-            }
-
-            100% {
-                box-shadow: 0 0 0 12px rgba(236, 173, 41, 0);
-            }
-        }
-
-        /* For the search button */
-        .btn-search {
-            padding: 0.75rem 2.5rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* For the booking button */
-        .btn-booking {
-            padding: 1rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 15px rgba(236, 173, 41, 0.3);
-        }
-
-        .btn-booking:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(236, 173, 41, 0.4);
-        }
-
-        /* Calculator Section Styles */
-        .underLine {
-            background-color: var(--theam-black-700)
-        }
-
-        .calculator-section {
-            background-color: var(--calculator-bg);
-            padding: 4rem 0;
-        }
-
-        .calculator-container {
-            max-width: 72rem;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .calculator-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .calculator-header h2 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        .calculator-header p {
-            max-width: 48rem;
-            margin: 1rem auto 0;
-            color: var(--text-light);
-        }
-
-        .calculator-card {
-            background-color: var(--card-bg);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            max-width: 56rem;
-            margin: 0 auto;
-            border: 1px solid var(--theam-black-700);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group1 {
-            position: relative;
-            left: 0;
-            right: 0;
-            margin: auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: flex-end;
-            margin-left: 8%;
-        }
-
-        .form-group2 {
-            position: relative;
-            left: 0;
-            right: 0;
-            margin: auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: flex-end;
-        }
-
-        .form-group1>div {
-            width: -webkit-fill-available;
-            margin-right: 2rem;
-        }
-
-        .form-group2>div {
-            width: -webkit-fill-available;
-            margin-right: 2rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-color);
-            margin-bottom: 0.25rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.375rem;
-            color: var(--text-color);
-            border: 1px solid var(--theam-black-700);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(236, 173, 41, 0.2);
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            color: var(--text-color);
-            border-color: var(--theam-black-700);
-            box-shadow: 0 1px 4px 0 rgba(236, 173, 41, 0.5);
-        }
-
-        .form-select:focus {
-            outline: none;
-            border-color: rgba(236, 173, 41, 0.8);
-            box-shadow: 0 0 0 3px rgba(236, 173, 41, 0.2);
-            transition: all 0.2s ease;
-        }
-
-        .form-select:hover {
-            border-color: var(--theam-black-600);
-        }
-
-        .vehicle-option {
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            border: 1px solid var(--theam-black-700);
-        }
-
-        .vehicle-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .vehicle-image {
-            width: 7rem;
-            height: 60px;
-            margin-right: 2rem;
-            padding-right: 1rem;
-            border-right: 2px solid var(--text-black-700);
-        }
-
-        .vehicle-name {
-            font-weight: 500;
-            color: var(--text-color);
-        }
-
-        .vehicle-price {
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-
-        /*----------------- Popular Destinations ---------------------*/
-        .popular-destinations {
-            background-color: var(--calculator-bg);
-            transition: background-color 0.3s ease;
-        }
-
-        .destination-card {
-            position: relative;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .destination-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-
-        /*------------ packege section --------------------*/
-        .package-card {
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0px 4px 10px rgba(37, 150, 190, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: white;
-            height: 100%;
-        }
-
-        .package-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .package-image {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-            position: relative;
-        }
-
-        .package-overlay {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            margin: auto;
-            display: flex;
-            width: fit-content;
-            gap: 8px;
-            background-color: var(--primary-color);
-        }
-
-        .package-detail {
-            display: flex;
-            align-items: center;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            border-right: 1px solid var(--bg-black-100);
-        }
-
-        .package-detail svg {
-            width: 16px;
-            height: 16px;
-            margin-right: 4px;
-        }
-
-        .package-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .package-rating {
-            color: #ecad29;
-            margin-bottom: 0.75rem;
-        }
-
-        .package-description {
-            color: black;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #d69c24;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .view-all-btn {
-            background-color: #e74c3c;
-            color: white;
-            padding: 0.75rem 2rem;
-            font-weight: 500;
-            border-radius: 0.375rem;
-            transition: all 0.3s ease;
-        }
-
-        .view-all-btn:hover {
-            background-color: #c0392b;
-            transform: translateY(-2px);
-        }
-
-        .section-divider {
-            width: 50px;
-            height: 3px;
-            background-color: var(--primary-color);
-            margin: 0 auto 1rem;
-        }
-
-
-        /* ----------------- callback section ----------------- */
-        .callback-section {
-            width: 90vw;
-        }
-
-        #counterT {
-            border-right: 1px solid var(--text-black-900);
-            border-bottom: 1px solid var(--text-black-900);
-        }
-
-        #counterB {
-            border-right: 1px solid var(--text-black-900);
-        }
-
-
-        /*--------------- Add these styles to your existing CSS -------------*/
-        .adventure-activities {
-            transition: background-color 0.3s ease;
-        }
-
-        .activity-card {
-            background-color: var(--card-bg);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-            box-shadow: 0px 4px 10px rgba(37, 150, 190, 0.6);
-        }
-
-        .activity-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            background-color: var(--primary-color);
-        }
-
-        .activity-card:hover .activity-title,
-        .activity-card:hover .activity-count {
-            color: var(--text-black-900);
-        }
-
-        .activity-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .activity-card:hover .activity-icon {
-            background-color: var(--text-black-900);
-        }
-
-        .activity-icon svg {
-            width: 30px;
-            height: 30px;
-            color: var(--text-black-900);
-        }
-
-        .activity-card:hover .activity-icon svg {
-            color: var(--primary-color);
-        }
-
-        .activity-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-            transition: color 0.3s ease;
-        }
-
-        .activity-count {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            transition: color 0.3s ease;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            z-index: 9999;
-            position: fixed;
-            right: 10%;
-            top: 1%;
-        }
-
-        .mobile-nav-toggle svg {
-            width: 30px;
-            height: 30px;
-            color: var(--bg-black-900);
-        }
-
-        /* Mobile Navigation Menu */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100vh;
-            background-color: var(--text-black-900);
-            z-index: 9998;
-            transition: all 0.3s ease-in-out;
-            padding-top: 80px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .mobile-nav.active {
-            right: 0;
-        }
-
-        .mobile-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mobile-nav li {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-nav a {
-            display: block;
-            padding: 15px 20px;
-            color: var(--bg-black-900);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav a:hover {
-            background-color: var(--theam-black-700);
-            color: var(--text-black-900);
-        }
-
-        .mobile-nav .active {
-            color: var(--theam-black-700);
-            position: relative;
-        }
-
-        .mobile-nav .active:after {
-            content: "";
-            position: absolute;
-            left: 20px;
-            bottom: 10px;
-            width: 30px;
-            height: 3px;
-            background-color: var(--theam-black-700);
-            border-radius: 99px;
-        }
-
-        /* Overlay for mobile menu */
-        .mobile-nav-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9997;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .mobile-nav-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-
-        /*----------------contact section---------------------*/
-        .getInTouch {
-            background-color: rgba(48, 114, 212, 0.4);
-            backdrop-filter: blur(15px);
-            width: 75vw;
-            height: fit-content;
-            justify-content: center;
-            position: absolute;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        .contact-section {
-            height: 90vh;
-            background-image: none;
-            background-size: cover;
-            background-repeat: inherit;
-        }
-
-        .iconBackground {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .iconBackground::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 3px solid transparent;
-            border-radius: 50%;
-            background: linear-gradient(white, white) padding-box,
-                linear-gradient(to right, #3b82f6, #ef4444, #f59e0b) border-box;
-            padding: 2px;
-            -webkit-mask: linear-gradient(white, white) padding-box,
-                linear-gradient(white, white);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-            animation: rotateBorder 2s linear infinite;
-        }
-
-        @keyframes rotateBorder {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .input {
-            border: 2px solid var(--primary-color);
-            border-radius: 0.4rem;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-        }
-
-
-        /*-----------------footer disaign ------------------*/
-        ul {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        .footer-section {
-            background: #151414;
-            position: relative;
-            margin-top: 3%;
-        }
-
-        .footerContainer {
-            padding-left: 10%;
-            padding-right: 10%;
-        }
-
-        .footer-cta {
-            border-bottom: 1px solid #373636;
-        }
-
-        .single-cta i {
-            color: #ff5e14;
-            font-size: 30px;
-            float: left;
-            margin-top: 8px;
-        }
-
-        .cta-text {
-            padding-left: 15px;
-            display: inline-block;
-        }
-
-        .footeLink {
-            margin-left: 20%;
-        }
-
-        .cta-text h4 {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .cta-text span {
-            color: #757575;
-            font-size: 15px;
-        }
-
-        .footer-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-pattern img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 330px;
-            background-size: cover;
-            background-position: 100% 100%;
-        }
-
-        .footer-logo {
-            margin-bottom: 30px;
-        }
-
-        .footer-logo img {
-            max-width: 200px;
-        }
-
-        .footer-text p {
-            margin-bottom: 14px;
-            font-size: 14px;
-            color: #7e7e7e;
-            line-height: 28px;
-        }
-
-        .footer-social-icon span {
-            color: #fff;
-            display: block;
-            font-size: 20px;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 20px;
-        }
-
-        .footer-social-icon a {
-            color: #fff;
-            font-size: 16px;
-            margin-right: 15px;
-        }
-
-        .footer-social-icon i {
-            height: 40px;
-            width: 40px;
-            text-align: center;
-            line-height: 38px;
-            border-radius: 50%;
-        }
-
-        .facebook-bg {
-            background: #3B5998;
-        }
-
-        .twitter-bg {
-            background: #55ACEE;
-        }
-
-        .google-bg {
-            background: #DD4B39;
-        }
-
-        .footer-widget-heading h3 {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .footer-widget-heading h3::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -15px;
-            height: 2px;
-            width: 50px;
-            background: #ff5e14;
-        }
-
-        .footer-widget ul li {
-            display: inline-block;
-            float: left;
-            width: 50%;
-            margin-bottom: 12px;
-        }
-
-        .footer-widget ul li a:hover {
-            color: #ff5e14;
-        }
-
-        .footer-widget ul li a {
-            color: #878787;
-            text-transform: capitalize;
-        }
-
-        .subscribe-form {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .subscribe-form input {
-            width: 100%;
-            padding: 14px 28px;
-            background: #2E2E2E;
-            border: 1px solid #2E2E2E;
-            color: #fff;
-        }
-
-        .subscribe-form button {
-            position: absolute;
-            right: 0;
-            background: #ff5e14;
-            padding: 13px 20px;
-            border: 1px solid #ff5e14;
-            top: 0;
-        }
-
-        .subscribe-form button i {
-            color: #fff;
-            font-size: 22px;
-            transform: rotate(-6deg);
-        }
-
-        .copyright-area {
-            background: #202020;
-            padding: 25px 0;
-        }
-
-        .copyright-text p {
-            margin: 0;
-            font-size: 14px;
-            color: #878787;
-        }
-
-        .copyright-text p a {
-            color: #ff5e14;
-        }
-
-        .footer-menu li {
-            display: inline-block;
-            margin-left: 20px;
-        }
-
-        .footer-menu li:hover a {
-            color: #ff5e14;
-        }
-
-        .footer-menu li a {
-            font-size: 14px;
-            color: #878787;
-        }
-
-        .colors {
-            color: var(--primary-hover);
-        }
-
-
-        /* =============================================================*/
-
-        /* Responsive adjustments */
-        @media (max-width: 850px) {
-
-            /* Hide desktop nav on mobile */
-            nav>div:last-child {
-                display: none;
-            }
-
-            /* Show mobile toggle button */
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            /* Adjust logo size */
-            nav>div:first-child {
-                font-size: 18px;
-            }
-
-            /* Adjust nav padding */
-            nav {
-                padding: 10px 20px;
-            }
-
-            .details {
-                z-index: 22;
-                position: absolute;
-                top: 25%;
-                left: 60px;
-                width: 80%;
-                height: 40%;
-                color: #ffffff;
-                background-color: rgba(48, 114, 212, 0.2);
-                padding: 20px;
-                border-radius: 10px;
-                backdrop-filter: blur(5px);
-
-            }
-
-            .details .title-1,
-            .details .title-2 {
-                font-size: 48px;
-            }
-
-            .details .title-box-1,
-            .details .title-box-2 {
-                height: 70px;
-            }
-
-            .details>.desc {
-                width: 70%;
-            }
-
-            .details>.cta {
-                width: 100%;
-            }
-
-
-            .pagination {
-                position: absolute;
-                margin-left: 10%;
-                display: inline-flex;
-            }
-
-            .calculator-card {
-                padding: 1rem;
-            }
-
-            .vehicle-option {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .vehicle-price {
-                margin-top: 0.5rem;
-                align-self: flex-end;
-            }
-
-
-            .packages-container {
-                grid-template-columns: repeat(1, 1fr);
-            }
-
-            #videoContainer {
-                margin: 3% 10% 10% 1%;
-            }
-
-            #supportCard {
-                width: 42%;
-                margin-left: 20%;
-            }
-
-            .activity-card {
-                padding: 1rem;
-            }
-
-            .activity-icon {
-                width: 50px;
-                height: 50px;
-            }
-
-            .activity-icon svg {
-                width: 24px;
-                height: 24px;
-            }
-
-            .activity-title {
-                font-size: 1rem;
-            }
-
-            .activity-count {
-                font-size: 0.8rem;
-            }
-
-            .contact-section {
-                height: 175vh;
-                background-image: none;
-                background-size: cover;
-                background-repeat: inherit;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                overflow-x: hidden !important;
-            }
-
-            nav {
-                overflow-x: hidden !important;
-                width: 100vw !important;
-            }
-
-            .form-group1 {
-                display: block;
-            }
-
-            .form-group2 {
-                display: block;
-            }
-
-            .details {
-                display: none;
-            }
-
-            .details .title-1,
-            .details .title-2 {
-                font-size: 36px;
-            }
-
-            .details .title-box-1,
-            .details .title-box-2 {
-                height: 50px;
-            }
-
-            .details>.desc {
-                width: 90%;
-            }
-
-
-            .pagination {
-                position: absolute;
-                left: 0px !important;
-                bottom: 60px;
-                width: 80% !important;
-                display: inline-flex;
-            }
-
-            .pagination>.arrow {
-                z-index: 60;
-                height: 50px;
-                border-radius: 999px;
-                display: grid;
-                place-items: center;
-                cursor: pointer;
-                background-color: var(--primary-color)
-            }
-
-            .pagination>.arrow:nth-child(2) {
-                margin-left: 20px;
-                background-color: var(--primary-color)
-            }
-
-            .pagination>.arrow svg {
-                width: 24px;
-                height: 24px;
-                stroke-width: 2;
-                color: var(--text-black-900);
-            }
-
-            .pagination .progress-sub-container {
-                display: none;
-            }
-
-            .pagination .slide-numbers {
-                width: 50px;
-                height: 50px;
-                position: absolute;
-                color: var(--text-black-900);
-                top: 0;
-                right: 0;
-                display: grid;
-                place-items: center;
-                font-size: 32px;
-                font-weight: bold;
-            }
-
-            .calculator-header h2 {
-                font-size: 1.75rem;
-            }
-
-            .calculator-header p {
-                font-size: 0.875rem;
-            }
-
-            .popular-destinations h2 {
-                font-size: 1.75rem;
-            }
-
-            .popular-destinations h3 {
-                font-size: 1.25rem;
-            }
-
-            .destination-card h3 {
-                font-size: 1.5rem;
-                bottom: 1rem;
-            }
-
-            .destination-group {
-                display: flex;
-                flex-direction: column;
-                height: 137vh;
-                border: none;
-            }
-
-            .destination-group>div {
-                height: 20%;
-                margin-bottom: 2%;
-            }
-
-            #localVideo {
-                height: 101%;
-            }
-
-            #supportCard {
-                width: 73vw !important;
-                margin-left: 0 !important;
-            }
-
-            .grid-cols-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .activity-card {
-                padding: 0.75rem;
-            }
-
-            .activity-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .activity-icon svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            .activity-title {
-                font-size: 0.9rem;
-            }
-
-            .activity-count {
-                font-size: 0.75rem;
-            }
-
-            /* Further mobile adjustments */
-            .mobile-nav {
-                width: 85%;
-            }
-
-            .mobile-nav a {
-                padding: 12px 20px;
-                font-size: 13px;
-            }
-
-            .theme-switcher {
-                margin-top: 14%;
-                right: 2%;
-            }
-
-            .mobile-nav-toggle {
-                right: 3%;
-            }
-
-            .callback-section {
-                overflow-x: hidden !important;
-            }
-
-            .contact-section {
-                height: 170vh;
-                background-image: none;
-                background-color: grey;
-            }
-
- 
-
-            .btn {
-                padding: 0.5rem 1.5rem;
-            }
-
-        }
-    </style>
 </head>
 
 <body>
@@ -1746,7 +261,7 @@
                     <p class="section-title mb-2">EXPLORE GREAT PLACES</p>
                 </div>
                 <div class="section-divider" data-aos="fade-up" data-aos-duration="3000"></div>
-                <div data-aos="fade-up" data-aos-duration="1000">
+                <div data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000">
                     <h2 class="text-3xl font-bold mb-4">POPULAR PACKAGES</h2>
                 </div>
                 <div data-aos="fade-up" data-aos-duration="800"">
@@ -1869,6 +384,14 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.186-.013-.37-.039-.548M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.186.013-.37.039-.548M15 6a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 9a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
+                                People
+                            </div>
+                            <div class="package-detail">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                                 Sri Lanka
                             </div>
                         </div>
@@ -1905,6 +428,14 @@
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.186-.013-.37-.039-.548M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.186.013-.37.039-.548M15 6a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 9a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                People
+                            </div>
+                            <div class="package-detail">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 Sri Lanka
                             </div>
@@ -2248,7 +779,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 mt-1 text-yellow-500"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                     </svg>
                                     <div>
                                         <p class="font-medium">+1 100 104 40001</p>
@@ -2269,7 +800,126 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                         viewBox="0 0 24 24">
                                         <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.06                                    </svg>
+9zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                </a>
+                                <a href="#" class="iconBackground p-2 rounded-full hover:bg-yellow-500 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                                <a href="#" class="iconBackground p-2 rounded-full hover:bg-yellow-500 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="input-group md:w-1/2">
+                    <form class="space-y-4">
+                        <div class="input">
+                            <input type="text" placeholder="Name"
+                                class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div class="input">
+                            <input type="email" placeholder="Email"
+                                class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div class="input">
+                            <input type="contact" placeholder="contact"
+                                class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        </div>
+                        <div class="input">
+                            <textarea placeholder="Write your Message" rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition duration-300 font-medium">
+                            SUBMIT
+                        </button>
+                    </form>
+                </div>
+            </div>
+    </section>
+
+
+
+    <!------------- footer section --------------->
+    <footer class="bg-gray-900 text-gray-300 w-full">
+        <!-- Contact Info Section -->
+        <div class="footerContainer py-8 border-b border-gray-700">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Location -->
+                <div class="flex items-start">
+                    <div class="colors text-2xl mr-4 mt-1">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white text-lg font-semibold">Find us</h4>
+                        <p class="text-gray-500">1010 Avenue, sw 54321, chandigarh</p>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="flex items-start">
+                    <div class="colors text-2xl mr-4 mt-1">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white text-lg font-semibold">Call us</h4>
+                        <p class="text-gray-500">9876543210 0</p>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="flex items-start">
+                    <div class="colors text-2xl mr-4 mt-1">
+                        <i class="far fa-envelope-open"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white text-lg font-semibold">Mail us</h4>
+                        <p class="text-gray-500">mail@info.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Content -->
+        <div class="footerContainer py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- About Section -->
+                <div class="mb-8 lg:mb-0">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-white">CLK DESIGNER</h2>
+                        <h3 class="text-xl font-semibold colors">WEBB</h3>
+                    </div>
+                    <p class="text-gray-500 mb-6">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        consectetur adipisicing elit. Lorem ipsum dolor sit amet.
+                    </p>
+                    <div>
+                        <h4 class="text-white text-lg font-semibold mb-4">Follow us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="iconBackground p-2 rounded-full hover:bg-yellow-500 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                                </svg>
+                            </a>
+                            <a href="#" class="iconBackground p-2 rounded-full hover:bg-yellow-500 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                 </svg>
                             </a>
                             <a href="#" class="iconBackground p-2 rounded-full hover:bg-yellow-500 transition">
@@ -2342,7 +992,8 @@
                         <a href="#" class="text-gray-500 hover:text-orange-500">Terms</a>
                         <a href="#" class="text-gray-500 hover:text-orange-500">Privacy</a>
                         <a href="#" class="text-gray-500 hover:text-orange-500">Policy</a>
-                        <a href="#" class="text-gray-500 hover:text-orange-500">Contact</a>
+                        <a href="#" class="text-gray-500 hover:text-orange-500">Con
+tact</a>
                     </div>
                 </div>
             </div>
@@ -2353,8 +1004,8 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'></script>
     <script src="js/homePageJs.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Google Maps API key removed for security. Please add your own key in a secure way. -->
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnOuyXRiORJ67beRA2x-XzDAtIyHryIZQ&libraries=places"></script> -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnOuyXRiORJ67beRA2x-XzDAtIyHryIZQ&libraries=places"></script>
     <script src="js/calculator.js"></script>
     <script>
         AOS.init();
