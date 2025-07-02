@@ -1,0 +1,110 @@
+<!-- calculator.html: Contains the Calculator section of the site -->
+<section class="calculator-section" id="calculator">
+  <div class="calculator-container">
+    <div class="calculator-header">
+      <h2>CALCULATOR</h2>
+      <p>
+        Southern traveler Tours brings you some of the most diverse and competitive Holiday Packages
+      </p>
+    </div>
+    <div class="calculator-card">
+      <div class="form-group1">
+        <div class="form-group">
+          <label class="form-label">Selected Location</label>
+          <select class="form-select" id="locationSelect">
+            <option value="">Choose Your Location</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Select Destination</label>
+          <select class="form-select" id="destinationSelect">
+            <option value="">Choose Your Destination</option>
+          </select>
+        </div>
+        <div style="text-align: center" class="form-group">
+          <button class="btn btn-p btn-search" id="searchBtn">Search</button>
+        </div>
+      </div>
+      <div class="form-group2">
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input type="text" class="form-input" id="locationInput" readonly />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Distance (km)</label>
+          <input type="text" class="form-input" id="distanceInput" readonly />
+        </div>
+      </div>
+      <div>
+        <div class="vehicle-option">
+          <div class="vehicle-info">
+            <img src="assets/icon/mini.png" alt="car" class="vehicle-image" />
+            <div>
+              <p class="vehicle-name">Mini 1-2 persons</p>
+            </div>
+          </div>
+          <div>
+            <p class="vehicle-price" id="miniPrice">Rs.00/-</p>
+          </div>
+        </div>
+        <div class="vehicle-option">
+          <div class="vehicle-info">
+            <img src="assets/icon/sedan.png" alt="car" class="vehicle-image" />
+            <div>
+              <p class="vehicle-name">Sedan 2-3 persons</p>
+            </div>
+          </div>
+          <div>
+            <p class="vehicle-price" id="sedanPrice">Rs.00/-</p>
+          </div>
+        </div>
+        <div class="vehicle-option">
+          <div class="vehicle-info">
+            <img src="assets/icon/van2.png" alt="car" class="vehicle-image" />
+            <div>
+              <p class="vehicle-name">Van 4-7 persons</p>
+            </div>
+          </div>
+          <div>
+            <p class="vehicle-price" id="vanPrice">Rs.00/-</p>
+          </div>
+        </div>
+        <div class="vehicle-option">
+          <div class="vehicle-info">
+            <img src="assets/icon/van2.png" alt="car" class="vehicle-image" />
+            <div>
+              <p class="vehicle-name">Van 1-12 persons</p>
+            </div>
+          </div>
+          <div>
+            <p class="vehicle-price" id="hiroofPrice">Rs.00/-</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Vehicle</label>
+        <select class="form-select" id="vehicleSelect">
+          <option value="">SELECT VEHICLE</option>
+          <option value="mini">Mini (1-2 persons)</option>
+          <option value="sedan">Sedan (2-3 persons)</option>
+          <option value="van">Van (4-7 persons)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp No</label>
+        <input type="text" class="form-input" id="whatsappNo" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-input" id="bookingDate" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Time</label>
+        <input type="time" class="form-input" id="bookingTime" />
+      </div>
+      <div style="text-align: center; margin-top: 2rem">
+        <button class="btn btn-p btn-booking" id="bookBtn">Book Your Journey</button>
+      </div>
+    </div>
+  </div>
+</section>
