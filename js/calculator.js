@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // WhatsApp link (international format, remove leading 0 if present)
     let phone = whatsappNo.replace(/[^\d]/g, "");
     if (phone.startsWith("0")) phone = phone.substring(1);
-    if (!phone.startsWith("94")) phone = "0715422624"; // Default to Sri Lanka country code
+    phone = whatsappNo.replace(/[^\d]/g, ""); // Default to Sri Lanka country code
     const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     // Open WhatsApp chat
