@@ -76,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-
   // Wait for Google Maps API to be loaded before using it
   function getDistanceService() {
     if (window.google && window.google.maps && window.google.maps.DistanceMatrixService) {
@@ -332,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listeners
     if (elements.searchBtn) elements.searchBtn.addEventListener("click", handleSearch);
     if (elements.bookBtn) elements.bookBtn.addEventListener("click", handleBooking);
-    if (elements.autoFillBtn) elements.autoFillBtn.addEventListener("click", autoFillForm);
+    // if (elements.autoFillBtn) elements.autoFillBtn.addEventListener("click", autoFillForm);
     setupVehicleTiles();
   }
 
