@@ -135,12 +135,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const destination = elements.destinationSelect.value;
 
     if (!origin || !destination) {
-      alert("Please select both location and destination");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Information',
+        text: 'Please select both location and destination',
+        confirmButtonColor: '#ff9800'
+      });
       return;
     }
 
     if (origin === destination) {
-      alert("Location and destination cannot be the same");
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Selection',
+        text: 'Location and destination cannot be the same',
+        confirmButtonColor: '#ff9800'
+      });
       return;
     }
 
@@ -192,7 +202,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Basic validation
     if (!origin || !destination || !vehicle || !whatsappNo || !date || !time) {
-      alert("Please fill in all booking details.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Booking',
+        text: 'Please fill in all booking details.',
+        confirmButtonColor: '#ff9800'
+      });
       return;
     }
 
@@ -225,17 +240,43 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => {
         if (response.ok) {
-          alert(
-            "Your booking request has been submitted. Our team will contact you shortly via WhatsApp to confirm your booking."
-          );
+          Swal.fire({
+            icon: 'success',
+            title: 'Booking Submitted',
+            text: 'Your booking request has been submitted. Our team will contact you shortly via WhatsApp to confirm your booking.',
+            confirmButtonColor: '#ff9800'
+          });
+          // Clear form data after successful booking
+          if (elements.locationSelect) elements.locationSelect.value = "";
+          if (elements.destinationSelect) elements.destinationSelect.value = "";
+          if (elements.whatsappNo) elements.whatsappNo.value = "";
+          if (elements.bookingDate) elements.bookingDate.value = "";
+          if (elements.bookingTime) elements.bookingTime.value = "";
+          if (elements.locationInput) elements.locationInput.value = "";
+          if (elements.distanceInput) elements.distanceInput.value = "";
+          // Deselect vehicle tiles
+          const tiles = document.querySelectorAll('.vehicle-option-tile');
+          tiles.forEach(t => t.classList.remove('selected'));
+          window.selectedVehicle = null;
+          if (elements.bookBtn) elements.bookBtn.disabled = true;
+          // Optionally, reset prices
+          updatePrices(0);
         } else {
-          alert(
-            "Sorry, your booking request could not be submitted at this time. Please try again shortly, or contact our customer support at  +94 71 542 2624 via WhatsApp or phone call for assistance."
-          );
+          Swal.fire({
+            icon: 'error',
+            title: 'Booking Failed',
+            text: 'Sorry, your booking request could not be submitted at this time. Please try again shortly, or contact our customer support at  +94 71 542 2624 via WhatsApp or phone call for assistance.',
+            confirmButtonColor: '#ff9800'
+          });
         }
       })
       .catch(() => {
-        alert("Failed to send booking email.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Network Error',
+          text: 'Failed to send booking email.',
+          confirmButtonColor: '#ff9800'
+        });
       });
   }
 
