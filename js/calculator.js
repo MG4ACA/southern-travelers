@@ -45,7 +45,20 @@ document.addEventListener("DOMContentLoaded", function () {
     bookingDate: document.getElementById("bookingDate"),
     bookingTime: document.getElementById("bookingTime"),
     bookBtn: document.getElementById("bookBtn"),
+    autoFillBtn: document.getElementById("autoFillBtn"),
   };
+  // Auto-fill form fields with sample data
+  function autoFillForm() {
+    if (elements.locationSelect) elements.locationSelect.value = "Colombo";
+    if (elements.destinationSelect) elements.destinationSelect.value = "Kandy";
+    if (elements.vehicleSelect) elements.vehicleSelect.value = "sedan";
+    if (elements.bookingDate) elements.bookingDate.value = new Date().toISOString().slice(0, 10);
+    if (elements.bookingTime) elements.bookingTime.value = "10:00";
+    if (elements.whatsappNo) elements.whatsappNo.value = "0771234567";
+    if (elements.locationInput) elements.locationInput.value = "Colombo to Kandy";
+    if (elements.distanceInput) elements.distanceInput.value = "115 km";
+    updatePrices(115);
+  }
 
   // Check if all elements exist
   for (const [key, element] of Object.entries(elements)) {
@@ -161,29 +174,47 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Compose booking message
-    const message =
-      `Booking Request:\n` +
-      `From: ${origin}\n` +
-      `To: ${destination}\n` +
-      `Vehicle: ${vehicle}\n` +
-      `Distance: ${distance}\n` +
-      `Date: ${date}\n` +
-      `Time: ${time}\n` +
-      `WhatsApp: ${whatsappNo}`;
+    // Send booking email using EmailJS REST API
+    const serviceID = "service_ly8lb0k";
+    const templateID = "template_raub3zi";
+    const publicKey = "NUQDVaKOkqRf51Fx7"; // Replace with your actual EmailJS public key
 
-    // WhatsApp link (international format, remove leading 0 if present)
-    let phone = whatsappNo.replace(/[^\d]/g, "");
-    if (phone.startsWith("0")) phone = phone.substring(1);
-    phone = whatsappNo.replace(/[^\d]/g, ""); // Default to Sri Lanka country code
-    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const data = {
+      service_id: serviceID,
+      template_id: templateID,
+      user_id: publicKey,
+      template_params: {
+        origin: origin,
+        destination: destination,
+        vehicle: vehicle,
+        whatsapp: whatsappNo,
+        date: date,
+        time: time,
+        distance: distance,
+      },
+    };
 
-    // Open WhatsApp chat
-    window.open(waUrl, "_blank");
-
-    // Optionally, for SMS (uncomment if needed):
-    // const smsUrl = `sms:${phone}?body=${encodeURIComponent(message)}`;
-    // window.open(smsUrl);
+    fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert(
+            "Your booking request has been submitted. Our team will contact you shortly via WhatsApp to confirm your booking."
+          );
+        } else {
+          alert(
+            "Sorry, your booking request could not be submitted at this time. Please try again shortly, or contact our customer support at  +94 71 542 2624 via WhatsApp or phone call for assistance."
+          );
+        }
+      })
+      .catch(() => {
+        alert("Failed to send booking email.");
+      });
   }
 
   // Initialize the calculator
@@ -193,6 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listeners
     if (elements.searchBtn) elements.searchBtn.addEventListener("click", handleSearch);
     if (elements.bookBtn) elements.bookBtn.addEventListener("click", handleBooking);
+    if (elements.autoFillBtn) elements.autoFillBtn.addEventListener("click", autoFillForm);
   }
 
   init();
