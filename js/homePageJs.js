@@ -451,24 +451,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const youtubeVideo = document.getElementById("youtubeVideo");
   const closeModal = document.getElementById("closeModal");
 
-  playButton.addEventListener("click", function () {
-    const videoId = this.getAttribute("data-video-id");
-    youtubeVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0`;
-    videoModal.classList.remove("hidden");
-  });
+  if (playButton && videoModal && youtubeVideo && closeModal) {
+    playButton.addEventListener("click", function () {
+      const videoId = this.getAttribute("data-video-id");
+      youtubeVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0`;
+      videoModal.classList.remove("hidden");
+    });
 
-  closeModal.addEventListener("click", function () {
-    youtubeVideo.src = "";
-    videoModal.classList.add("hidden");
-  });
-
-  // Close modal when clicking outside the video
-  videoModal.addEventListener("click", function (e) {
-    if (e.target === videoModal) {
+    closeModal.addEventListener("click", function () {
       youtubeVideo.src = "";
       videoModal.classList.add("hidden");
-    }
-  });
+    });
+
+    // Close modal when clicking outside the video
+    videoModal.addEventListener("click", function (e) {
+      if (e.target === videoModal) {
+        youtubeVideo.src = "";
+        videoModal.classList.add("hidden");
+      }
+    });
+  }
 });
 
 //scrolling effect--------------------------------

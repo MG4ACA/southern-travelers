@@ -76,12 +76,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Initialize Google Maps service
-  const distanceService = new google.maps.DistanceMatrixService();
+
+  // Wait for Google Maps API to be loaded before using it
+  function getDistanceService() {
+    if (window.google && window.google.maps && window.google.maps.DistanceMatrixService) {
+      return new window.google.maps.DistanceMatrixService();
+    } else {
+      throw new Error("Google Maps API is not loaded.");
+    }
+  }
 
   // Calculate actual distance
   async function calculateDistance(origin, destination) {
     return new Promise((resolve, reject) => {
+      let distanceService;
+      try {
+        distanceService = getDistanceService();
+      } catch (e) {
+        reject(e);
+        return;
+      }
       distanceService.getDistanceMatrix(
         {
           origins: [origin + ", Sri Lanka"],
@@ -223,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
         html:
           "Please fill in all booking details." +
           (missing.length
-            ? '<br><b>Missing:</b><ul style=\"text-align:left\">' +
+            ? '<br><b>Missing:</b><ul style="text-align:left">' +
               missing.map((f) => `<li>${f}</li>`).join("") +
               "</ul>"
             : ""),
@@ -233,9 +247,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Send booking email using EmailJS REST API
-    const serviceID = "service_ly8lb0k";
-    const templateID = "template_raub3zi";
-    const publicKey = "NUQDVaKOkqRf51Fx7"; // Replace with your actual EmailJS public key
+    const serviceID = "service_kfmzim9";
+    const templateID = "template_odtncvw";
+    const publicKey = "vVAjk6x-1Ia3Dnwsb"; // Replace with your actual EmailJS public key
 
     const data = {
       service_id: serviceID,
@@ -287,9 +301,10 @@ document.addEventListener("DOMContentLoaded", function () {
           const tiles = document.querySelectorAll(".vehicle-option-tile");
           tiles.forEach((t) => t.classList.remove("selected"));
           window.selectedVehicle = null;
-          if (elements.bookBtn) elements.bookBtn.disabled = true;
           // Optionally, reset prices
           updatePrices(0);
+          // Re-enable booking button for next booking
+          if (elements.bookBtn) elements.bookBtn.disabled = false;
         } else {
           Swal.fire({
             icon: "error",
