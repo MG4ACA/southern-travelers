@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bookingDate: document.getElementById("bookingDate"),
     bookingTime: document.getElementById("bookingTime"),
     bookBtn: document.getElementById("bookBtn"),
-    autoFillBtn: document.getElementById("autoFillBtn"),
+    // autoFillBtn: document.getElementById("autoFillBtn"),
   };
   // Auto-fill form fields with sample data
   function autoFillForm() {
