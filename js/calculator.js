@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function autoFillForm() {
     if (elements.locationSelect) elements.locationSelect.value = "Colombo";
     if (elements.destinationSelect) elements.destinationSelect.value = "Kandy";
-    window.selectedVehicle = "sedan";
     if (elements.bookingDate) elements.bookingDate.value = new Date().toISOString().slice(0, 10);
     if (elements.bookingTime) elements.bookingTime.value = "10:00";
     if (elements.whatsappNo) elements.whatsappNo.value = "0771234567";
@@ -136,20 +135,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!origin || !destination) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Missing Information',
-        text: 'Please select both location and destination',
-        confirmButtonColor: '#ff9800'
+        icon: "warning",
+        title: "Missing Information",
+        text: "Please select both location and destination",
+        confirmButtonColor: "#ff9800",
       });
       return;
     }
 
     if (origin === destination) {
       Swal.fire({
-        icon: 'error',
-        title: 'Invalid Selection',
-        text: 'Location and destination cannot be the same',
-        confirmButtonColor: '#ff9800'
+        icon: "error",
+        title: "Invalid Selection",
+        text: "Location and destination cannot be the same",
+        confirmButtonColor: "#ff9800",
       });
       return;
     }
@@ -157,31 +156,39 @@ document.addEventListener("DOMContentLoaded", function () {
     elements.locationInput.value = `${origin} to ${destination}`;
     elements.distanceInput.value = "Calculating...";
 
+    // Show loader
+    Swal.fire({
+      title: "Calculating distance...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
     try {
       const { distance } = await calculateDistance(origin, destination);
       elements.distanceInput.value = `${distance.toFixed(1)} km`;
       updatePrices(distance);
+      Swal.close();
     } catch (error) {
       console.error(error);
       elements.distanceInput.value = "Error calculating distance";
+      Swal.close();
     }
   }
 
   // Vehicle tile selection logic
   function setupVehicleTiles() {
-    const tiles = document.querySelectorAll('.vehicle-option-tile');
-    const bookBtn = elements.bookBtn;
+    const tiles = document.querySelectorAll(".vehicle-option-tile");
     window.selectedVehicle = null;
-    if (bookBtn) bookBtn.disabled = true;
-    tiles.forEach(tile => {
-      tile.addEventListener('click', function() {
-        tiles.forEach(t => t.classList.remove('selected'));
-        this.classList.add('selected');
-        window.selectedVehicle = this.getAttribute('data-vehicle');
-        if (bookBtn) bookBtn.disabled = false;
+    tiles.forEach((tile) => {
+      tile.addEventListener("click", function () {
+        tiles.forEach((t) => t.classList.remove("selected"));
+        this.classList.add("selected");
+        window.selectedVehicle = this.getAttribute("data-vehicle");
       });
-      tile.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
+      tile.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           this.click();
         }
@@ -202,11 +209,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Basic validation
     if (!origin || !destination || !vehicle || !whatsappNo || !date || !time) {
+      // Build a detailed message listing missing fields
+      let missing = [];
+      if (!origin) missing.push("Pickup Location");
+      if (!destination) missing.push("Destination");
+      if (!vehicle) missing.push("Vehicle Selection");
+      if (!whatsappNo) missing.push("WhatsApp Number");
+      if (!date) missing.push("Date");
+      if (!time) missing.push("Time");
       Swal.fire({
-        icon: 'warning',
-        title: 'Incomplete Booking',
-        text: 'Please fill in all booking details.',
-        confirmButtonColor: '#ff9800'
+        icon: "warning",
+        title: "Incomplete Booking",
+        html:
+          "Please fill in all booking details." +
+          (missing.length
+            ? '<br><b>Missing:</b><ul style=\"text-align:left\">' +
+              missing.map((f) => `<li>${f}</li>`).join("") +
+              "</ul>"
+            : ""),
+        confirmButtonColor: "#ff9800",
       });
       return;
     }
@@ -231,6 +252,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     };
 
+    Swal.fire({
+      title: "Sending booking...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
@@ -239,12 +267,13 @@ document.addEventListener("DOMContentLoaded", function () {
       body: JSON.stringify(data),
     })
       .then((response) => {
+        Swal.close();
         if (response.ok) {
           Swal.fire({
-            icon: 'success',
-            title: 'Booking Submitted',
-            text: 'Your booking request has been submitted. Our team will contact you shortly via WhatsApp to confirm your booking.',
-            confirmButtonColor: '#ff9800'
+            icon: "success",
+            title: "Booking Submitted",
+            text: "Your booking request has been submitted. Our team will contact you shortly via WhatsApp to confirm your booking.",
+            confirmButtonColor: "#ff9800",
           });
           // Clear form data after successful booking
           if (elements.locationSelect) elements.locationSelect.value = "";
@@ -255,27 +284,28 @@ document.addEventListener("DOMContentLoaded", function () {
           if (elements.locationInput) elements.locationInput.value = "";
           if (elements.distanceInput) elements.distanceInput.value = "";
           // Deselect vehicle tiles
-          const tiles = document.querySelectorAll('.vehicle-option-tile');
-          tiles.forEach(t => t.classList.remove('selected'));
+          const tiles = document.querySelectorAll(".vehicle-option-tile");
+          tiles.forEach((t) => t.classList.remove("selected"));
           window.selectedVehicle = null;
           if (elements.bookBtn) elements.bookBtn.disabled = true;
           // Optionally, reset prices
           updatePrices(0);
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'Booking Failed',
-            text: 'Sorry, your booking request could not be submitted at this time. Please try again shortly, or contact our customer support at  +94 71 542 2624 via WhatsApp or phone call for assistance.',
-            confirmButtonColor: '#ff9800'
+            icon: "error",
+            title: "Booking Failed",
+            text: "Sorry, your booking request could not be submitted at this time. Please try again shortly, or contact our customer support at  +94 71 542 2624 via WhatsApp or phone call for assistance.",
+            confirmButtonColor: "#ff9800",
           });
         }
       })
       .catch(() => {
+        Swal.close();
         Swal.fire({
-          icon: 'error',
-          title: 'Network Error',
-          text: 'Failed to send booking email.',
-          confirmButtonColor: '#ff9800'
+          icon: "error",
+          title: "Network Error",
+          text: "Failed to send booking email.",
+          confirmButtonColor: "#ff9800",
         });
       });
   }
@@ -287,7 +317,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listeners
     if (elements.searchBtn) elements.searchBtn.addEventListener("click", handleSearch);
     if (elements.bookBtn) elements.bookBtn.addEventListener("click", handleBooking);
-    if (elements.bookBtn) elements.bookBtn.disabled = true;
     if (elements.autoFillBtn) elements.autoFillBtn.addEventListener("click", autoFillForm);
     setupVehicleTiles();
   }

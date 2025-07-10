@@ -1,3 +1,9 @@
+/* Highlight error for invalid input fields */
+.input-highlight-error {
+  outline: 1px solid #ff9800 !important;
+  box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.2) !important;
+  transition: outline 0.2s, box-shadow 0.2s;
+}
 /* --- Calculator Vehicle Tile Styles --- */
 .vehicle-options-grid {
   display: flex;
