@@ -565,11 +565,7 @@ nav > div:last-child > .active:after {
 }
 
 .vehicle-image {
-  width: 7rem;
-  height: 60px;
-  margin-right: 2rem;
-  padding-right: 1rem;
-  border-right: 2px solid var(--text-black-700);
+  width: 10vw;
 }
 
 .vehicle-name {
@@ -966,7 +962,7 @@ ul {
 }
 
 .footerContainer {
-     margin-top: 6rem;
+  margin-top: 6rem;
   padding-left: 10%;
   padding-right: 10%;
 }

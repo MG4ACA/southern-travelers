@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sedanPrice: document.getElementById("sedanPrice"),
     vanPrice: document.getElementById("vanPrice"),
     hiroofPrice: document.getElementById("hiroofPrice"),
-    vehicleSelect: document.getElementById("vehicleSelect"),
+    // vehicleSelect: document.getElementById("vehicleSelect"),
     whatsappNo: document.getElementById("whatsappNo"),
     bookingDate: document.getElementById("bookingDate"),
     bookingTime: document.getElementById("bookingTime"),
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function autoFillForm() {
     if (elements.locationSelect) elements.locationSelect.value = "Colombo";
     if (elements.destinationSelect) elements.destinationSelect.value = "Kandy";
-    if (elements.vehicleSelect) elements.vehicleSelect.value = "sedan";
+    window.selectedVehicle = "sedan";
     if (elements.bookingDate) elements.bookingDate.value = new Date().toISOString().slice(0, 10);
     if (elements.bookingTime) elements.bookingTime.value = "10:00";
     if (elements.whatsappNo) elements.whatsappNo.value = "0771234567";
@@ -157,12 +157,34 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Vehicle tile selection logic
+  function setupVehicleTiles() {
+    const tiles = document.querySelectorAll('.vehicle-option-tile');
+    const bookBtn = elements.bookBtn;
+    window.selectedVehicle = null;
+    if (bookBtn) bookBtn.disabled = true;
+    tiles.forEach(tile => {
+      tile.addEventListener('click', function() {
+        tiles.forEach(t => t.classList.remove('selected'));
+        this.classList.add('selected');
+        window.selectedVehicle = this.getAttribute('data-vehicle');
+        if (bookBtn) bookBtn.disabled = false;
+      });
+      tile.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+  }
+
   // Handle booking
   function handleBooking() {
     // Collect form data
     const origin = elements.locationSelect.value;
     const destination = elements.destinationSelect.value;
-    const vehicle = elements.vehicleSelect.value;
+    const vehicle = window.selectedVehicle || "";
     const whatsappNo = elements.whatsappNo.value.trim();
     const date = elements.bookingDate.value;
     const time = elements.bookingTime.value;
@@ -224,7 +246,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listeners
     if (elements.searchBtn) elements.searchBtn.addEventListener("click", handleSearch);
     if (elements.bookBtn) elements.bookBtn.addEventListener("click", handleBooking);
+    if (elements.bookBtn) elements.bookBtn.disabled = true;
     if (elements.autoFillBtn) elements.autoFillBtn.addEventListener("click", autoFillForm);
+    setupVehicleTiles();
   }
 
   init();

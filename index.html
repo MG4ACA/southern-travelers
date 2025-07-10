@@ -181,83 +181,46 @@
                     </div>
                 </div>
 
-                <div>
-                    <div class="vehicle-option">
-                        <div class="vehicle-info">
-                            <img src="assets/icon/mini.png" alt="car" class="vehicle-image">
-                            <div>
-                                <p class="vehicle-name">Mini 1-2 persons</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="vehicle-price" id="miniPrice">Rs.00/-</p>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-option">
-                        <div class="vehicle-info">
-                            <img src="assets/icon/sedan.png" alt="car" class="vehicle-image">
-                            <div>
-                                <p class="vehicle-name">Sedan 2-3 persons</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="vehicle-price" id="sedanPrice">Rs.00/-</p>
-                        </div>
-                    </div>
-                    <div class="vehicle-option">
-                        <div class="vehicle-info">
-                            <img src="assets/icon/van2.png" alt="car" class="vehicle-image">
-                            <div>
-                                <p class="vehicle-name">Van 4-7 persons</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="vehicle-price" id="vanPrice">Rs.00/-</p>
-                        </div>
-                    </div>
-                    <div class="vehicle-option">
-                      <div class="vehicle-info">
-                        <img src="assets/icon/van2.png" alt="car" class="vehicle-image" />
-                        <div>
-                          <p class="vehicle-name">Van 1-12 persons</p>
-                        </div>
-                      </div>
-                      <div>
-                        <p class="vehicle-price" id="hiroofPrice">Rs.00/-</p>
-                      </div>
-                    </div>
+                <div class="vehicle-options-grid" style="display: flex; gap: 1rem; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                  <div class="vehicle-option-tile" data-vehicle="mini" tabindex="0">
+                    <img src="assets/icon/mini.png" alt="Mini" class="vehicle-image">
+                    <div class="vehicle-name">Mini 1-2 persons</div>
+                    <div class="vehicle-price" id="miniPrice">Rs.00/-</div>
+                  </div>
+                  <div class="vehicle-option-tile" data-vehicle="sedan" tabindex="0">
+                    <img src="assets/icon/sedan.png" alt="Sedan" class="vehicle-image">
+                    <div class="vehicle-name">Sedan 2-3 persons</div>
+                    <div class="vehicle-price" id="sedanPrice">Rs.00/-</div>
+                  </div>
+                  <div class="vehicle-option-tile" data-vehicle="van" tabindex="0">
+                    <img src="assets/icon/van2.png" alt="Van" class="vehicle-image">
+                    <div class="vehicle-name">Van 4-7 persons</div>
+                    <div class="vehicle-price" id="vanPrice">Rs.00/-</div>
+                  </div>
+                  <div class="vehicle-option-tile" data-vehicle="hiroof" tabindex="0">
+                    <img src="assets/icon/van2.png" alt="Hi Roof" class="vehicle-image">
+                    <div class="vehicle-name">Hi Roof 4-12 persons</div>
+                    <div class="vehicle-price" id="hiroofPrice">Rs.00/-</div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Select Vehicle</label>
-                    <select class="form-select" id="vehicleSelect">
-                        <option value="">SELECT VEHICLE</option>
-                        <option value="mini">Mini (1-2 persons)</option>
-                        <option value="sedan">Sedan (2-3 persons)</option>
-                        <option value="van">Van (4-7 persons)</option>
-                        <option value="hiroof">Hi Roof (4-12 persons)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group" style="display: flex; gap: 1rem;">
+                  <div style="flex:1;">
                     <label class="form-label">WhatsApp No</label>
-                    <input type="text" class="form-input" id="whatsappNo">
-                </div>
-
-                <div class="form-group">
+                    <input type="text" class="form-input" id="whatsappNo" placeholder="07XXXXXXXX" />
+                  </div>
+                  <div style="flex:1;">
                     <label class="form-label">Date</label>
-                    <input type="date" class="form-input" id="bookingDate">
-                </div>
-
-                <div class="form-group">
+                    <input type="date" class="form-input" id="bookingDate" />
+                  </div>
+                  <div style="flex:1;">
                     <label class="form-label">Time</label>
-                    <input type="time" class="form-input" id="bookingTime">
+                    <input type="time" class="form-input" id="bookingTime" />
+                  </div>
                 </div>
-
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn btn-p btn-booking" id="bookBtn">Book Your Journey</button>
-                    <button class="btn btn-secondary" id="autoFillBtn" type="button" style="margin-left: 1rem;">Auto Fill</button>
+                <div class="form-group" style="text-align: center; margin-top: 2rem; display: flex; justify-content: center; gap: 1rem;">
+                  <button class="btn btn-p btn-booking" id="bookBtn" type="button">Book Your Journey</button>
+                  <button class="btn btn-secondary" id="autoFillBtn" type="button">Auto Fill</button>
                 </div>
             </div>
         </div>
@@ -747,7 +710,7 @@
     <!------------- contact section --------------->
     <section class="contact-section pt-6" id="contact">
         <div class="container mx-auto px-4 max-w-4xl">
-            <div class="text-center mb-8">
+            <div class="text-center mb-8 mt-9">
                 <div class="h-1 w-24 mx-auto mb-2 underLine" data-aos="fade-up" data-aos-duration="3000"></div>
                 <h2 class="text-4xl font-bold mb-4">Contact us</h2>
                 <p class="text-xl">We'd love to hear from you!</p>
